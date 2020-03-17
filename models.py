@@ -27,11 +27,14 @@ class Post(db.Model):
             except IntegrityError:
                 count += 1
                 self.title_slug = f'{slugify(self.title)}-{count}'
+
     def public_url(self):
         return url_for('show_post', slug=self.title_slug)
+
     @staticmethod
     def get_by_slug(slug):
         return Post.query.filter_by(title_slug=slug).first()
+
     @staticmethod
     def get_all():
         return Post.query.all()

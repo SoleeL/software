@@ -13,9 +13,8 @@ app.config['TESTING'] = True
 app.config['SECRET_KEY'] = '7110c8ae51a4b5af97be6534caef90e4bb9bdcb3380af008f90b23a5d1616bf319bc298105da20fe'
 #APP CONFIG DE LA BASE DE DATOS EN MAQUINA VIRTUAL DANI
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://bravo:bravo@179.9.115.60/software'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['USE_SESSION_FOR_NEXT']=True
-app.config['SQLALCHEMY_POOL_SIZE']=100
 app.config['SQLALCHEMY_POOL_SIZE']=100
 
 login_manager = LoginManager(app)
@@ -23,21 +22,22 @@ login_manager.login_view = "login"
 
 db = SQLAlchemy(app)
 
-db.create_all()
 
+import models
 
-from models import User, Post
+with app.app_context():
+    db.create_all()
 
 posts = []
 
 @app.route("/")
 def index():
-    posts = Post.get_all()
+    posts = models.Post().get_all()
     return render_template("index.html", posts=posts)
 
 @app.route("/p/<string:slug>/")
 def show_post(slug):
-    post = Post.get_by_slug(slug)
+    post = models.Post().get_by_slug(slug)
     if post is None:
         abort(404)
     return render_template("post_view.html", post=post)
@@ -51,7 +51,7 @@ def post_form(post_id):
     if form.validate_on_submit():
         title = form.title.data
         content = form.content.data
-        post = Post(user_id=current_user.id, title=title, content=content)
+        post = model.Post(user_id=current_user.id, title=title, content=content)
         post.save()
         return redirect(url_for('index'))
     return render_template("admin/post_form.html", form=form)
