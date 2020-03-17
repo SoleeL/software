@@ -1,4 +1,9 @@
 # Ingeniería de Software
+
+## Instalacion de requerimientos
+
+> pip install -r requirements.txt
+
 Lecciones de GIT
 
 * [Link a la playlist de YouTube](https://www.youtube.com/watch?v=hWglK8nWh60&list=PLPl81lqbj-4I8i-x2b5_MG58tZfgKmJls)
