@@ -15,11 +15,11 @@
             </div>
 
             <div class="card-body">
-                <form action="/" method="POST" novalidate>
+                <form action="" method="POST" novalidate>
                     {{ form.hidden_tag() }}
                     <div class="form-group">
                         {{ form.email.label }}
-                        {{ form.email(type="email", class="form-control", placeholder="First name")  }}<br>
+                        {{ form.email(type="email", class="form-control", placeholder="Ingrese correo")  }}<br>
                         {% for error in form.email.errors %}
                         <span style="color: red;">{{ error }}</span>
                         {% endfor %}
@@ -27,9 +27,7 @@
                     </div>
                     <div class="form-group">
                         {{ form.password.label }}
-                        {{ form.password(type="password", class="form-control", placeholder="First name") }}<br>
-                        <input type="password" class="form-control" id="formGroupExampleInput2"
-                            placeholder="Ingrese contraseña">
+                        {{ form.password(type="password", class="form-control", placeholder="Ingrese contraseña") }}<br>
                         {% for error in form.password.errors %}
                         <span style="color: red;">{{ error }}</span>
                         {% endfor %}
