@@ -1,31 +1,76 @@
 {% extends "base_template.html" %}
 {% block title %}Registro de usuarios{% endblock %}
 {% block content %}
-    <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        <div>
-            {{ form.name.label }}
-            {{ form.name(size=64) }}<br>
-            {% for error in form.name.errors %}
-            <span style="color: red;">{{ error }}</span>
-            {% endfor %}
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.name.label }}
+        {{ form.name(size=64) }}<br>
+        {% for error in form.name.errors %}
+        <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div>
+        {{ form.email.label }}
+        {{ form.email }}<br>
+        {% for error in form.email.errors %}
+        <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div>
+        {{ form.password.label }}
+        {{ form.password }}<br>
+        {% for error in form.password.errors %}
+        <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div>
+        {{ form.submit() }}
+    </div>
+</form>
+
+
+
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <div class="card mt-4 text-center">
+
+            <div class="card-header">
+
+                <h3>Registrarse</h3>
+
+            </div>
+
+            <div class="card-body">
+                <form action="/" method="POST" novalidate>
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.name.label }} {{ form.name(size=64) }}
+                        <input type="name" class="form-control" id="formGroupExampleInput1"
+                            placeholder="Nombre">
+                        {% for error in form.email.errors %}
+                        <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
+
+                    </div>
+                    <div class="form-group">
+                        {{ form.password.label(for="formGroupExampleInput2") }}
+                        <input type="password" class="form-control" id="formGroupExampleInput2"
+                            placeholder="Ingrese contraseña">
+                        {% for error in form.password.errors %}
+                        <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
+
+                    </div>
+
+                    <div>{{ form.submit( type="submit", class_="btn btn-primary btn-block mt-4") }}</div>
+                    <div>¿No tienes cuenta? <a href="{{ url_for('show_signup_form') }}">Regístrate</a></div>
+
+                </form>
+            </div>
         </div>
-        <div>
-            {{ form.email.label }}
-            {{ form.email }}<br>
-            {% for error in form.email.errors %}
-            <span style="color: red;">{{ error }}</span>
-            {% endfor %}
-        </div>
-        <div>
-            {{ form.password.label }}
-            {{ form.password }}<br>
-            {% for error in form.password.errors %}
-            <span style="color: red;">{{ error }}</span>
-            {% endfor %}
-        </div>
-        <div>
-            {{ form.submit() }}
-        </div>
-    </form>
+    </div>
+</div>
+
+
 {% endblock %}

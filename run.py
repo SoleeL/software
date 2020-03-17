@@ -42,11 +42,14 @@ def login():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = LoginForm()
+    print (form.email.data)
     if form.validate_on_submit():
         user = get_user(form.email.data)
+        print (form.email.data)
         if user is not None and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
             next_page = request.args.get('next')
+            print (next_page)
             if not next_page or url_parse(next_page).netloc != '':
                 next_page = url_for('index')
             return redirect(next_page)

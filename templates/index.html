@@ -1,10 +1,47 @@
 {% extends "base_template.html" %}
 {% block title %}Tutorial Flask: Miniblog{% endblock %}
 {% block content %}
-    <ul>
-    {% for post in posts %}
-        <li>{{ post.title }}</li>
-        <li>{{ post.title_slug }}</li>
-    {% endfor %}
-    </ul>
+
+<div class="container">
+    <div class="container pb-4">
+        <section class="container-fluid flex-grow">
+            <div class="row">
+                <div class="col-md-9 order-md-2 pt-2">
+                    <h2>Publicaciones:</h2>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="container">
+        <div class="accordion" id="accordionExample">
+            {% for post in posts %}
+            <div class="card">
+                <div class="card-header" id="{{ post.title }}">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse"
+                            data-target="#{{ post.title_slug }}" aria-expanded="true" aria-controls="collapseOne">
+                            {{ post.title }}
+                        </button>
+                    </h2>
+                </div>
+
+                <div id="{{ post.title_slug }}" class="collapse" aria-labelledby="{{ post.title }}"
+                    data-parent="#accordionExample">
+                    <div class="card-body">
+                        <h4>Contenido: </h4>
+                        <p class="card-text">{{ post.content }}</p>
+                        <p class="card-text">{{ post.title_slug }}</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+
+
 {% endblock %}
