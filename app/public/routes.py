@@ -6,7 +6,7 @@ from . import public_bp
 @public_bp.route("/")
 def index():
     posts = Post.get_all()
-    return render_template("public/index.html", posts=posts)
+    return render_template('public/index.html', posts=posts)
 
 @public_bp.route("/p/<string:slug>/")
 def show_post(slug):
