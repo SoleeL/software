@@ -6,13 +6,16 @@ import os
 db = SQLAlchemy()
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_url_path="/")
     app.config.from_object('config')
     
     db.init_app(app)
     
-    from .categorias import categorias_bp
-    app.register_blueprint(categorias_bp)
+    from .autentificacion import autentificacion_bp
+    app.register_blueprint(autentificacion_bp)
+    
+    from .publico import publico_bp
+    app.register_blueprint(publico_bp)
     
     # solo cuando se quiere crear la base de datos con los modelos
     with app.app_context():
@@ -21,5 +24,3 @@ def create_app():
     return app
     
 app = create_app()
-
-from . import routes
