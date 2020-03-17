@@ -6,3 +6,5 @@ id_rsa.pub
 software.zip
 env2/
 .vscode/
+key
+key.pub
