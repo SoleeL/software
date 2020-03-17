@@ -7,6 +7,6 @@ from flask import render_template
 def index():
     return render_template("publico/index.html")
 
-@public_bp.route("/posts")
+@publico_bp.route("/posts")
 def posts():
     pass
